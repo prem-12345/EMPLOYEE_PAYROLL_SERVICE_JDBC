@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,6 @@ public class EmployeePayrollService {
     PreparedStatement preparedStatement;
 
     public List<Employee> getAllEmployeeDetails() {
-        Connection connection = DataBaseConfiguration.getConnection();
         String FETCH_RECORD_QUERY = "select * from employee_payroll ";
         Employee employee;
         List<Employee> employeeList = new ArrayList<>();
@@ -105,4 +103,16 @@ public class EmployeePayrollService {
         }
         return employeeList;
     }
+
+    public void createTableEmployeeDetails() {
+        String CREATE_TABLE_QUERY = "create table employee_details(ID int NOT NULL AUTO_INCREMENT UNIQUE,NAME varchar(150) NOT NULL,GENDER varchar(1) NOT NULL,PHONE_NUMBER int NOT NULL,ADDRESS varchar(150) NOT NULL,DEPARTMENT varchar(50) NOT NULL)";
+        try {
+            preparedStatement = connection.prepareStatement(CREATE_TABLE_QUERY);
+            preparedStatement.executeUpdate();
+            System.out.println("QUERY EXECUTED");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 }
