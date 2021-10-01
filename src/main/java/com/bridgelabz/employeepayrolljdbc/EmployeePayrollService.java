@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class EmployeePayrollService {
 
@@ -15,6 +16,7 @@ public class EmployeePayrollService {
 
     Connection connection = DataBaseConfiguration.getConnection();
     PreparedStatement preparedStatement;
+    Scanner scanner = new Scanner(System.in);
 
     public List<Employee> getAllEmployeeDetails() {
         String FETCH_RECORD_QUERY = "select * from employee_payroll ";
@@ -126,4 +128,43 @@ public class EmployeePayrollService {
         }
     }
 
+    public int insertEmployeeDetails() {
+        String INSERT_QUERY = "insert into employee_details (ID,NAME,GENDER,PHONE_NUMBER,ADDRESS,DEPARTMENT)values(?,?,?,?,?,?)";
+        int row = 0;
+        try {
+            preparedStatement = connection.prepareStatement(INSERT_QUERY);
+            System.out.println("ENTER THE ID : ");
+            int id = scanner.nextInt();
+            System.out.println("ENTER THE NAME :");
+            String name = scanner.next();
+            System.out.println("ENTER THE GENDER :");
+            String gender = scanner.next();
+            System.out.println("ENTER THE PHONE NUMBER :");
+            int phone = scanner.nextInt();
+            System.out.println("ENTER THE ADDRESS :");
+            String address = scanner.next();
+            System.out.println("ENTER THE DEPARTMENT :");
+            String department = scanner.next();
+
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, gender);
+            preparedStatement.setInt(4, phone);
+            preparedStatement.setString(5, address);
+            preparedStatement.setString(6, department);
+
+            row = preparedStatement.executeUpdate();
+            System.out.println("QUERY EXECUTED");
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return row;
+    }
+
 }
+
+
+
+
+

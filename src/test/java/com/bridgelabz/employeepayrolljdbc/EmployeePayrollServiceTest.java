@@ -27,4 +27,13 @@ class EmployeePayrollServiceTest {
         assertEquals(2, employeeList.size());
     }
 
+    @org.junit.jupiter.api.Test
+    public void givenEmployeeDetailsTable_whenUpdate_shouldMatch_updatedRowCount() {
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+        int updatedRecord = employeePayrollService.insertEmployeeDetails();
+        assertEquals(1, updatedRecord);
+    }
+
+    
+
 }
