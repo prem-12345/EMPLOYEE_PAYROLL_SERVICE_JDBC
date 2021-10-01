@@ -25,6 +25,9 @@ public class EmployeePayrollMain {
         // TO CREATE EMPLOYEE DETAILS TABLE
         employeePayrollService.createTableEmployeeDetails();
 
+        // TO CREATE PAYROLL DETAILS TABLE
+        employeePayrollService.createTablePayrollDetails();
+
 
 
     }

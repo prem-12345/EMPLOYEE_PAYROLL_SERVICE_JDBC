@@ -115,4 +115,15 @@ public class EmployeePayrollService {
         }
     }
 
+    public void createTablePayrollDetails() {
+        String CREATE_TABLE_QUERY = "create table payroll_details(EMP_ID int NOT NULL,SALARY double NOT NULL,BASIC_PAY double NOT NULL,DEDUCTIONS double NOT NULL,NET_PAY double NOT NULL)";
+        try {
+            preparedStatement = connection.prepareStatement(CREATE_TABLE_QUERY);
+            preparedStatement.executeUpdate();
+            System.out.println("QUERY EXECUTED");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 }
