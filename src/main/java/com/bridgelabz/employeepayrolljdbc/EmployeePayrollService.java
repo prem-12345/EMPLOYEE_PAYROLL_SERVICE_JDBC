@@ -128,7 +128,7 @@ public class EmployeePayrollService {
         }
     }
 
-    public int insertEmployeeDetails() {
+    public int insertIntoEmployeeDetails() {
         String INSERT_QUERY = "insert into employee_details (ID,NAME,GENDER,PHONE_NUMBER,ADDRESS,DEPARTMENT)values(?,?,?,?,?,?)";
         int row = 0;
         try {
@@ -152,6 +152,37 @@ public class EmployeePayrollService {
             preparedStatement.setInt(4, phone);
             preparedStatement.setString(5, address);
             preparedStatement.setString(6, department);
+
+            row = preparedStatement.executeUpdate();
+            System.out.println("QUERY EXECUTED");
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return row;
+    }
+
+    public int insertIntoPayrollDetails() {
+        String INSERT_QUERY = "insert into payroll_details (EMP_ID,SALARY,BASIC_PAY,DEDUCTIONS,NET_PAY)values(?,?,?,?,?)";
+        int row = 0;
+        try {
+            preparedStatement = connection.prepareStatement(INSERT_QUERY);
+            System.out.println("ENTER THE EMPLOYEE ID : ");
+            int empId = scanner.nextInt();
+            System.out.println("ENTER THE SALARY :");
+            double salary = scanner.nextDouble();
+            System.out.println("ENTER THE BASIC PAY :");
+            double basicPay = scanner.nextDouble();
+            System.out.println("ENTER THE DEDUCTIONS :");
+            double deductions = scanner.nextDouble();
+            System.out.println("ENTER THE NET PAY :");
+            double netPay = scanner.nextDouble();
+
+            preparedStatement.setInt(1, empId);
+            preparedStatement.setDouble(2, salary);
+            preparedStatement.setDouble(3, basicPay);
+            preparedStatement.setDouble(4, deductions);
+            preparedStatement.setDouble(5, netPay);
 
             row = preparedStatement.executeUpdate();
             System.out.println("QUERY EXECUTED");

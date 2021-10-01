@@ -29,7 +29,10 @@ public class EmployeePayrollMain {
         employeePayrollService.createTablePayrollDetails();
 
         // TO ADD EMPLOYEE INTO THE EMPLOYEE DETAILS TABLE
-        employeePayrollService.insertEmployeeDetails();
+        employeePayrollService.insertIntoEmployeeDetails();
+
+        // TO ADD EMPLOYEE INTO THE PAYROLL DETAILS TABLE
+        employeePayrollService.insertIntoPayrollDetails();
 
 
     }

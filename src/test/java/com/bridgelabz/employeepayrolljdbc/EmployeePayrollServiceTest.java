@@ -30,7 +30,14 @@ class EmployeePayrollServiceTest {
     @org.junit.jupiter.api.Test
     public void givenEmployeeDetailsTable_whenUpdate_shouldMatch_updatedRowCount() {
         EmployeePayrollService employeePayrollService = new EmployeePayrollService();
-        int updatedRecord = employeePayrollService.insertEmployeeDetails();
+        int updatedRecord = employeePayrollService.insertIntoEmployeeDetails();
+        assertEquals(1, updatedRecord);
+    }
+
+    @org.junit.jupiter.api.Test
+    public void givenPayrollDetailsTable_whenUpdate_shouldMatch_updatedRowCount() {
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+        int updatedRecord = employeePayrollService.insertIntoPayrollDetails();
         assertEquals(1, updatedRecord);
     }
 
