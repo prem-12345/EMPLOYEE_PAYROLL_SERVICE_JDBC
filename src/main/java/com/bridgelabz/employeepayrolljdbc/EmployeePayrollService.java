@@ -1,9 +1,6 @@
 package com.bridgelabz.employeepayrolljdbc;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class EmployeePayrollService {
     public static void main(String[] args) {
@@ -25,29 +22,11 @@ public class EmployeePayrollService {
 
             //UC2 - RETRIEVE THE EMPLOYEE PAYROLL DATA FROM DATABASE
             String FETCH_RECORD_QUERY = "select * from employee_payroll ";
+
+            //UC3 - UPDATE SALARY BASE PAY FOR EMPLOYEE TERISSA
+            String UPDATE_RECORD_QUERY = "update employee_payroll set BASIC_PAY = 30000 where NAME = 'TERISSA'";
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(FETCH_RECORD_QUERY);
-
-            List<Employee> employees = new ArrayList<>();
-            while (resultSet.next()){
-                Employee employee = new Employee();
-                employee.setId(resultSet.getInt("ID"));
-                employee.setName(resultSet.getString("NAME"));
-                employee.setGender(resultSet.getString("GENDER"));
-                employee.setPhoneNumber(resultSet.getInt("PHONE_NUMBER"));
-                employee.setAddress(resultSet.getString("ADDRESS"));
-                employee.setDepartment(resultSet.getString("DEPARTMENT"));
-                employee.setSalary(resultSet.getInt("SALARY"));
-                employee.setBasicPay(resultSet.getInt("BASIC_PAY"));
-                employee.setDeduction(resultSet.getInt("DEDUCTIONS"));
-                employee.setNetPay(resultSet.getInt("NET_PAY"));
-                employee.setStartDate(resultSet.getString("START_DATE"));
-                employees.add(employee);
-            }
-
-            for (Employee emp:employees){
-                System.out.println(emp);
-            }
+            statement.executeUpdate(UPDATE_RECORD_QUERY);
 
             System.out.println("QUERY EXECUTED");
 
