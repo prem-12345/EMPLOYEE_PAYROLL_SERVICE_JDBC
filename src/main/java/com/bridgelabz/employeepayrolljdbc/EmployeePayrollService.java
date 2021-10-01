@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,5 +67,42 @@ public class EmployeePayrollService {
             e.printStackTrace();
         }
         return row;
+    }
+
+    public List<Employee> retrieveEmployee(String startDate, String endDate) {
+        List<Employee> employeeList = new ArrayList<>();
+        String SELECT_QUERY = "select * from employee_payroll where START_DATE between ? AND ?";
+        String start = String.valueOf(startDate);
+        String end = String.valueOf(endDate);
+        Employee employee;
+        try {
+            preparedStatement = connection.prepareStatement(SELECT_QUERY);
+            preparedStatement.setString(1, start);
+            preparedStatement.setString(2, end);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                employee = new Employee();
+                employee.setId(resultSet.getInt("ID"));
+                employee.setName(resultSet.getString("NAME"));
+                employee.setGender(resultSet.getString("GENDER"));
+                employee.setPhoneNumber(resultSet.getInt("PHONE_NUMBER"));
+                employee.setAddress(resultSet.getString("ADDRESS"));
+                employee.setDepartment(resultSet.getString("DEPARTMENT"));
+                employee.setSalary(resultSet.getInt("SALARY"));
+                employee.setBasicPay(resultSet.getInt("BASIC_PAY"));
+                employee.setDeduction(resultSet.getInt("DEDUCTIONS"));
+                employee.setNetPay(resultSet.getInt("NET_PAY"));
+                employee.setStartDate(resultSet.getString("START_DATE"));
+                employeeList.add(employee);
+            }
+            for (Employee person : employeeList) {
+                System.out.println(person);
+            }
+            System.out.println("QUERY EXECUTED");
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return employeeList;
     }
 }

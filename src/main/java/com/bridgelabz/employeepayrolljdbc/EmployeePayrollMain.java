@@ -18,5 +18,9 @@ public class EmployeePayrollMain {
 
         //TO UPDATE EMPLOYEE SALARY USING PREPARED STATEMENT
         employeePayrollService.updateEmployeeSalary("TERISSA",50000.00);
+
+        //TO RETRIEVE EMPLOYEE FROM GIVEN DATE RANGE
+        employeePayrollService.retrieveEmployee("2018-06-01","2020-06-01");
+
     }
 }

@@ -20,4 +20,11 @@ class EmployeePayrollServiceTest {
         assertEquals(1,updatedRecord);
     }
 
+    @org.junit.jupiter.api.Test
+    public void givenEmployeePayrollDataRange_whenRetrieved_shouldMatch_employeeCount(){
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+        List<Employee> employeeList = employeePayrollService.retrieveEmployee("2018-06-01","2020-06-01");
+        assertEquals(2, employeeList.size());
+    }
+
 }
